@@ -161,22 +161,22 @@
 3. Isolated Unit Tests vs. Angular Testing Utilities!
 
 ## ECMA Script and TypeScript Questions
-1. What is ECMAScript ES5/ES6?
-2. What is “ES6 +A”?
-3. What is TypeScript in Angular 2?
-4. Why should I use Typescript ?
-5. What are Types in TypeScript?
-6. TypeScript Advantages - Pros and Cons!
-7. How to Setup and Install Typescript NPM and Angular 2
-8. What is an Interface in TypeScript?
-9. What is Functions in TypeScript? How many types you defined in TypeScript?
-10.TypeScript - The Fundamental Concepts!
-11.How Work Automatic Assignment of Constructor Parameters in TypeScript?
-12.What is Typings in Angular 2?
-13.Why type definition with TypeScript in Angular 2?
-14.Can I use Angular 2 with Typings in Angular 2?
-15.Are Typescript type definitions Required?
-16.Do we only need type definition files not “node_modules”?
-17.How to create custom type definitions in Angular 2?
-18.How to load file in your Angular 2 project?
-19.Dynamic vs. Static Typing?
+1.  What is ECMAScript ES5/ES6?
+2.  What is “ES6 +A”?
+3.  What is TypeScript in Angular 2?
+4.  Why should I use Typescript ?
+5.  What are Types in TypeScript?
+6.  TypeScript Advantages - Pros and Cons!
+7.  How to Setup and Install Typescript NPM and Angular 2
+8.  What is an Interface in TypeScript?
+9.  What is Functions in TypeScript? How many types you defined in TypeScript?
+10. TypeScript - The Fundamental Concepts!
+11. How Work Automatic Assignment of Constructor Parameters in TypeScript?
+12. What is Typings in Angular 2?
+13. Why type definition with TypeScript in Angular 2?
+14. Can I use Angular 2 with Typings in Angular 2?
+15. Are Typescript type definitions Required?
+16. Do we only need type definition files not “node_modules”?
+17. How to create custom type definitions in Angular 2?
+18. How to load file in your Angular 2 project?
+19. Dynamic vs. Static Typing?
