@@ -313,7 +313,8 @@ export class serviceComponent implements OnInit {
 
 Core Concepts
 
-**Animations**: Animate component behavior without deep knowledge of animation techniques or CSS with Angular's animation library.
+__Animations__: Animate component behavior without deep knowledge of animation techniques or CSS with Angular's
+animation library.
 
 **Change detection** : The change detection documentation will cover how Angular decides that a component property
 value has changed, when to update the screen, and how it uses zones to intercept asynchronous activity and run its change detection strategies.
