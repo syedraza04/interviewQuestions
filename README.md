@@ -313,29 +313,29 @@ export class serviceComponent implements OnInit {
 
 Core Concepts
 
-** Animations: Animate component behavior without deep knowledge of animation techniques or CSS with Angular's animation library.
+**Animations**: Animate component behavior without deep knowledge of animation techniques or CSS with Angular's animation library.
 
-** Change detection: The change detection documentation will cover how Angular decides that a component property
+**Change detection** : The change detection documentation will cover how Angular decides that a component property
 value has changed, when to update the screen, and how it uses zones to intercept asynchronous activity and run its change detection strategies.
 
-** Events: The events documentation will cover how to use components and services to raise events with mechanisms
+**Events** : The events documentation will cover how to use components and services to raise events with mechanisms
 for publishing and subscribing to events.
 
-** Forms: Support complex data entry scenarios with HTML-based validation and dirty checking.
+**Forms** : Support complex data entry scenarios with HTML-based validation and dirty checking.
 
-** HTTP: Communicate with a server to get data, save data, and invoke server-side actions with an HTTP client.
+**HTTP** : Communicate with a server to get data, save data, and invoke server-side actions with an HTTP client.
 
-** Lifecycle hooks: Tap into key moments in the lifetime of a component, from its creation to its destruction, by
+**Lifecycle hooks** : Tap into key moments in the lifetime of a component, from its creation to its destruction, by
 implementing the lifecycle hook interfaces.
 
-** Pipes: Use pipes in your templates to improve the user experience by transforming values for display. Consider
+**Pipes** : Use pipes in your templates to improve the user experience by transforming values for display. Consider
 this currency pipe expression:
 
 price | currency:'USD':true
 
 
 
-** Router: Navigate from page to page within the client application and never leave the browser.
+**Router** : Navigate from page to page within the client application and never leave the browser.
 
-** Testing: Run unit tests on your application parts as they interact with the Angular framework using the Angular
+**Testing** : Run unit tests on your application parts as they interact with the Angular framework using the Angular
 Testing Platform.
