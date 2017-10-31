@@ -11,10 +11,14 @@
 7.	For what purpose angular service is used?
 8.	Is there any global variable in angular?
 9.	How can you share data between angular components?
-10.	What is Input and Output?
+10.	What is @Input and @Output?
 11.	What is router? and why is it used?
 12.	What is module and how to modulerize application?
 13.	What is lazy loading and why is it used for?
+Lazy Loading is on demand loading of the application modules
+```
+Routes= [{path:'recipes'},loadChildren:'./recipes/recipes.module#RecipesModule']
+```
 14.	What is FormGroup and FormControl in angular? Why is it used for?
 15.	What is change in BrowserAnimationsModule from angular version 2 to 4?
 16.	What is angular decoration and why is used for?
@@ -168,6 +172,7 @@ Give examples
 2.  What is “ES6 +A”?
 3.  What is TypeScript in Angular 2?
 4.  Why should I use Typescript ?
+
 5.  What are Types in TypeScript?
 6.  TypeScript Advantages - Pros and Cons!
 7.  How to Setup and Install Typescript NPM and Angular 2
@@ -183,3 +188,116 @@ Give examples
 17. How to create custom type definitions in Angular 2?
 18. How to load file in your Angular 2 project?
 19. Dynamic vs. Static Typing?
+20. What is Destructuring?
+21. What is a spread operator? what is the alternative in JS?
+
+
+
+## Coding to implement features in Angular 2/4
+
+
+### Interceptors
+
+Interceptors intercept http request and manipulate with it
+
+first in the app.module import
+```
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+```
+add to the providers array
+```
+{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+```
+make an interceptor service
+
+```
+import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import {AuthService} from "../auth/auth.service";
+import {Injectable} from "@angular/core";
+
+@Injectable()
+
+export class AuthInterceptor implements HttpInterceptor{
+
+    constructor(private authService:AuthService){}
+
+    intercept(req:HttpRequest<any>, next:HttpHandler): Observable<HttpEvent<any>> {
+        console.log('Intercepted!', req);
+        const copiedReq = req.clone({params:req.params.set('auth',this.authService.getToken())});
+        return next.handle(copiedReq);
+    }
+}
+```
+
+## Components
+
+make a component.ts file
+```
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-my',
+  templateUrl: './my.component.html',
+  styleUrls: ['./my.component.css']
+})
+export class MyComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+```
+add it in the declarations array in the app.module
+
+## Directives
+
+```
+import { Directive, HostListener, HostBinding } from '@angular/core';
+
+@Directive({
+  selector: '[appDropdown]'
+})
+export class DropdownDirective {
+  @HostBinding('class.open') isOpen = false;
+
+  @HostListener('click') toggleOpen() {
+    this.isOpen = !this.isOpen;
+  }
+}
+```
+add in the exports array of the app.module
+
+to use it in the component
+```
+<li appDropdown >
+```
+
+## Services
+
+```
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class myService {
+  constructor(private router: Router) {}
+}
+```
+include the service in the providers array in the app.module
+
+to use it in the component add to the following to app.ts file
+
+```
+import { myService } from 'myService.service';
+@Component({
+  selector: 'my-app',
+  templateUrl: './my.component.html',
+  styleUrls: ['./my.component.css']
+})
+export class RecipeDetailComponent implements OnInit {
+  constructor(private mService: myService) {}
+```
+
