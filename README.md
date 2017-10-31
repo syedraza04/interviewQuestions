@@ -255,15 +255,13 @@ add it in the declarations array in the app.module
 
 ## Directives
 
-###Description
-
-Directives overview
+### Directives overview
 
 There are three kinds of directives in Angular:
 
-** Components—directives with a template.
-** Structural directives—change the DOM layout by adding and removing DOM elements.
-** Attribute directives—change the appearance or behavior of an element, component, or another directive.
+1. Components—directives with a template.
+2. Structural directives—change the DOM layout by adding and removing DOM elements.
+3. Attribute directives—change the appearance or behavior of an element, component, or another directive.
 
 ```
 import { Directive, HostListener, HostBinding } from '@angular/core';
