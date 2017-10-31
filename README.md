@@ -255,6 +255,16 @@ add it in the declarations array in the app.module
 
 ## Directives
 
+###Description
+
+Directives overview
+
+There are three kinds of directives in Angular:
+
+** Components—directives with a template.
+** Structural directives—change the DOM layout by adding and removing DOM elements.
+** Attribute directives—change the appearance or behavior of an element, component, or another directive.
+
 ```
 import { Directive, HostListener, HostBinding } from '@angular/core';
 
@@ -297,7 +307,7 @@ import { myService } from 'myService.service';
   templateUrl: './my.component.html',
   styleUrls: ['./my.component.css']
 })
-export class RecipeDetailComponent implements OnInit {
+export class serviceComponent implements OnInit {
   constructor(private mService: myService) {}
 ```
 
