@@ -162,8 +162,10 @@
 
 ## ECMA Script and TypeScript Questions
 1.  What is ECMAScript ES5/ES6?
+
     ```
     ES 6 is something
+
     ```
 2.  What is “ES6 +A”?
 3.  What is TypeScript in Angular 2?
