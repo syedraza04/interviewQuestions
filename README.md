@@ -47,7 +47,14 @@ Routes= [{path:'recipes'},loadChildren:'./recipes/recipes.module#RecipesModule']
 39. How Can We Setting Up Our Development Environment For Angular 2?
 40. What are TypeScript Types? In Detail?
 41. What is AOT Compilation? - Pros and Cons of Ahead-of-Time!
-42. What is Lazy Loading and How to enable Lazy Loading?
+You should use AOT to compile an application that must launch quickly. With AOT, there is no runtime compile step. The client doesn't need the compiler library at all and excluding it significantly reduces the total payload
+```
+@NgModule({
+  imports: [
+    RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
+  ],
+```
+
 43. How would you Optimize the Angular 2 Application for Better Performance?
 44. What are the Securities Threats should we be Aware of in Angular 2 Applications?
 45. What are major changes in Angular 2?
@@ -65,6 +72,31 @@ Routes= [{path:'recipes'},loadChildren:'./recipes/recipes.module#RecipesModule']
 57. What is Angular 4? What's New in Angular 4?
 58. What is Angular 5? What's New in Angular 5?
 
+59. What is Angular Metadata
+
+Angular metadata tells Angular how to construct instances of your application classes and interact with them at runtime.
+You specify the metadata with decorators such as @Component() and @Input(). You also specify metadata implicitly in the constructor declarations of these decorated classes.
+
+60. What are different compilation methods available?
+
+## Just-in-time (JIT) compilation
+   A bootstrapping method of compiling components and modules in the browser and launching the application dynamically. Just-in-time mode is a good choice during development.
+   the JIT compiler performs a lot of work to analyze the components in the application at runtime and generate code in memory. When the page is refreshed, all the work that has been done is thrown away, and the JIT compiler does the work all over again
+## Ahead-of-time (AOT) compilation
+   The component factories are generated at build time, Angular can skip the compilation and move straight to
+   creating views at runtime
+   No need to deploy the compiler (Half of Angular size).
+
+61. How Angular deals with security?
+
+    DomSanitizer and call one of the following methods:
+    ```
+    bypassSecurityTrustHtml
+    bypassSecurityTrustScript
+    bypassSecurityTrustStyle
+    bypassSecurityTrustUrl
+    bypassSecurityTrustResourceUrl
+    ```
 ## Components Questions
 
 1. What is Components in Angular 2?
@@ -122,35 +154,157 @@ Routes= [{path:'recipes'},loadChildren:'./recipes/recipes.module#RecipesModule']
 
 1. What is Routing Concepts in Angular 2?
 2. What is Routes?
+
 3. What is Router Imports?
+```
+import { RouterModule, Routes } from '@angular/router';
+```
+
 4. What is RouterOutlet?
+Acts as a placeholder that Angular dynamically fills based on the current router state.
+
 5. Is it possible to have a multiple router-outlet in the same template?
+You can have one primary <router-outlet> for every route and additional named <router-outlet name="abc">.
+The routes addressing these named outlets are called auxiliary routes.
+
 6. What is RouterLink?
+The RouterLink directives let you link to specific parts of your app.
+When the link is static, you can use the directive as follows:
+```
+<a routerLink="/user/bob">link to user component</a>
+```
+7. What is base Href?
+Most routing applications should add a <base> element to the index.html as the first child in the <head> tag to tell the router how to compose navigation URLs.
+
+8. What is wildcard Route?
+The ** path in the last route is a wildcard. The router will select this route if the requested URL doesn't match any paths for routes defined earlier in the configuration. This is useful for displaying a "404 - Not Found" page or redirecting to another route.
+
+9. What is RouterModule.forRoot() ?
+We pass the paths object that contains the routes of our application, inside this
+RouterModule.forRoot() method.
 
 ## State Management Questions
 1. What are cookies in Angular 2?
+
 2. How would you pass data from a parent component to a child component?
+
 3. How would you pass data from a child component to a parent component?
 
-## Dependency Injection Questions
-1. What is Dependency Injection (DI) in Angular 2?
-2. What is @Injectable()? Why Use?
-3. What is @Inject()? Why Use?
-4. @Injectable() vs. @Inject()?
-5. How to use Dependency Injection (DI) correctly in Angular 2?
-6. What are the difference between @Inject and @Injectable?
 
+## Dependency Injection Questions
+
+1. What is Dependency Injection (DI) in Angular 2?
+
+It's a coding pattern in which a class receives its dependencies from external sources rather than creating them itself.
+it uses TypeScript's constructor syntax for declaring parameters and properties simultaneously.
+
+2. What is @Injectable()? Why Use?
+@Injectable() is a decorator that is added to every service class, that has dependencies on other service
+3. What is @Inject()? Why Use?
+
+Angular 2 @Inject() is a special technique for letting Angular know that a parameter must be injected.
+```
+import { Inject } from '@angular/core';
+import { Http } from '@angular/http';
+
+class UserService {
+  users:Array<any>;
+
+  constructor(@Inject(Http) http:Http) {}
+}
+```
+
+4. @Injectable() vs. @Inject()?
+@Injectable() marks a class as available to an injector for instantiation. An injector reports an error when trying to instantiate a class that is not marked as @Injectable().
+
+```
+import {Injectable, bind} from 'angular2/core';
+import {Http} from 'angular2/http';
+
+@Injectable() /* This is #Step 1 */
+export class UserService {
+  constructor(http: Http/* This is #Step 2 */ ) {
+    this.http = Http;
+  }
+}
+```
+How to use Dependency Injection (DI) correctly in Angular 2?
+
+The basics Steps of Dependency injection,
+- 1. A class with @Injectable() to tell angular 2 that it’s to be injected “UserService”.
+- 2. A class with a constructor that accepts a type to be injected.
+
+
+7. Why DI is important?
+
+   Each class creates its own instance of the Desired method
+   which makes it difficult to share that method among different
+   classes and each time a new copy is created.
+   If the dependencies of the method whose instance is created are changed
+   we have to rewrite the class
+   When we write unit tests we are at the mercy of the hidden dependencies of the desired method
+
+   ### Solution
+   Change this
+   ```
+   public engine: Engine;
+     public tires: Tires;
+     public description = 'No DI';
+
+     constructor() {
+       this.engine = new Engine();
+       this.tires = new Tires();
+     }
+   ```
+   to this
+   ```
+   public description = 'DI';
+
+   constructor(public engine: Engine, public tires: Tires) { }
+   ```
+   and we can create a new instance of the car class by passing engines and tyres
+   in the constructor
+
+   ```
+   let car = new Car(new Engine(), new Tires());
+   ```
+
+   The definition of the engine and tire dependencies are decoupled from the Car class. You can pass in any kind of engine or tires you like, as long as they conform to the general API requirements of an engine or tires.
 
 ## API Questions
 1. Why would you use renderer methods instead of using native element methods?
 2. How would you control size of an element on resize of the window in a component?
 
 ## Ng-Modules Questions
+
 1. What is the purpose of NgModule??
+@NgModule takes a metadata object that tells Angular how to compile and run module code. It identifies the module's own components, directives, and pipes, making some of them public so external components can use them. @NgModule may add service providers to the application dependency injectors
+
 2. How do you decide to create a new NgModule?
+If the part of the app in becomes big contains the directives, services, components, interceptors then its a good idea
+to make a separate module and import it in the root module of the app
+
 3. What would you have in a shared module?
+service like the service that makes http calls, custom directive,pipes
+
 4. What is the purpose of exports in a NgModule?
+
+Export this NgModule's classes so they can be imported and used by components of other modules
+An NgModule is a class decorated with @NgModule metadata. The metadata do the following:
+
+Declare which components, directives, and pipes belong to the module.
+Make some of those classes public so that other component templates can use them.
+Import other modules with the components, directives, and pipes needed by the components in this module.
+Provide services at the application level that any application component can use.
+
 5. Angular 2 Modules vs. JavaScript Modules
+
+ - 1. An Angular module bounds declarable classes only. Declarables are the only classes that matter to the Angular.
+ - 2. Instead of defining all member classes in one giant file (as in a JavaScript module), we list the module's
+      classes in the @NgModule.declarations list.
+ - 3. An Angular module can only export the declarable classes it owns or imports from other modules. It doesn't
+      declare or export any other kind of class.
+
 6. What is the difference between a module's forRoot() and forChild() methods and why do you need it?
 
 
