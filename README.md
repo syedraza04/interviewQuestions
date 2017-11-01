@@ -287,9 +287,8 @@ to make a separate module and import it in the root module of the app
 3. What would you have in a shared module?
 service like the service that makes http calls, custom directive,pipes
 
-4. What is the purpose of exports in a NgModule?
-
-Export this NgModule's classes so they can be imported and used by components of other modules
+4. What is the purpose of exports in a NgModule? Export this NgModule's classes so they can be imported and used by
+components of other modules
 An NgModule is a class decorated with @NgModule metadata. The metadata do the following:
 
 Declare which components, directives, and pipes belong to the module.
