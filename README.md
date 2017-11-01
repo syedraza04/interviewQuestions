@@ -278,7 +278,8 @@ The basics Steps of Dependency injection,
 ## Ng-Modules Questions
 
 1. What is the purpose of NgModule??
-@NgModule takes a metadata object that tells Angular how to compile and run module code. It identifies the module's own components, directives, and pipes, making some of them public so external components can use them. @NgModule may add service providers to the application dependency injectors
+ @NgModule takes a metadata object that tells Angular how to compile and run module code. It identifies the module's
+ own components, directives, and pipes, making some of them public so external components can use them. @NgModule may add service providers to the application dependency injectors
 
 2. How do you decide to create a new NgModule?
 If the part of the app in becomes big contains the directives, services, components, interceptors then its a good idea
@@ -287,7 +288,8 @@ to make a separate module and import it in the root module of the app
 3. What would you have in a shared module?
 service like the service that makes http calls, custom directive,pipes
 
-4. What is the purpose of exports in a NgModule? Export this NgModule's classes so they can be imported and used by
+4. What is the purpose of exports in a NgModule?
+  Export this NgModule's classes so they can be imported and used by
 components of other modules
 An NgModule is a class decorated with @NgModule metadata. The metadata do the following:
 
