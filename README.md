@@ -280,24 +280,29 @@ The basics Steps of Dependency injection,
 1. What is the purpose of NgModule??
 
    @NgModule takes a metadata object that tells Angular how to compile and run module code. It identifies the module's
- own components, directives, and pipes, making some of them public so external components can use them. @NgModule may add service providers to the application dependency injectors
+   own components, directives, and pipes, making some of them public so external components can use them.
+
+   @NgModule may add service providers to the application dependency injectors
 
 2. How do you decide to create a new NgModule?
-If the part of the app in becomes big contains the directives, services, components, interceptors then its a good idea
-to make a separate module and import it in the root module of the app
+
+   If the part of the app in becomes big contains the directives, services, components, interceptors then its a good
+   idea to make a separate module and import it in the root module of the app
 
 3. What would you have in a shared module?
-service like the service that makes http calls, custom directive,pipes
+
+   Service like the service that makes http calls, custom directive,pipes
 
 4. What is the purpose of exports in a NgModule?
-  Export this NgModule's classes so they can be imported and used by
-components of other modules
-An NgModule is a class decorated with @NgModule metadata. The metadata do the following:
 
-Declare which components, directives, and pipes belong to the module.
-Make some of those classes public so that other component templates can use them.
-Import other modules with the components, directives, and pipes needed by the components in this module.
-Provide services at the application level that any application component can use.
+   Export this NgModule's classes so they can be imported and used by components of other modules
+
+   An NgModule is a class decorated with @NgModule metadata. The metadata do the following:
+
+   - Declare which components, directives, and pipes belong to the module.
+   - Make some of those classes public so that other component templates can use them.
+   - Import other modules with the components, directives, and pipes needed by the components in this module.
+   - Provide services at the application level that any application component can use.
 
 5. Angular 2 Modules vs. JavaScript Modules
 
@@ -326,13 +331,21 @@ Provide services at the application level that any application component can use
 Give examples
 ```
 2.  What is “ES6 +A”?
+
 3.  What is TypeScript in Angular 2?
+
+Typings describes contract of libraries you use. This allows the TypeScript compiler that what you use exist (classes, properties, ...).
+
 4.  Why should I use Typescript ?
 
 5.  What are Types in TypeScript?
+
 6.  TypeScript Advantages - Pros and Cons!
+
 7.  How to Setup and Install Typescript NPM and Angular 2
+
 8.  What is an Interface in TypeScript?
+
 9.  What is Functions in TypeScript? How many types you defined in TypeScript?
 10. TypeScript - The Fundamental Concepts!
 11. How Work Automatic Assignment of Constructor Parameters in TypeScript?
@@ -341,13 +354,28 @@ Give examples
 14. Can I use Angular 2 with Typings in Angular 2?
 15. Are Typescript type definitions Required?
 16. Do we only need type definition files not “node_modules”?
+
 17. How to create custom type definitions in Angular 2?
+
 18. How to load file in your Angular 2 project?
+
+
+
 19. Dynamic vs. Static Typing?
+
+Statically typed programming languages do type checking (the process of verifying and enforcing the constraints of types) at compile-time as opposed to run-time. Dynamically typed programming languages do type checking at run-time as opposed to Compile-time
+
 20. What is Destructuring?
+
+The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables
+
 21. What is a spread operator? what is the alternative in JS?
 
+To copy values in an immutable way
 
+[...state]
+
+Object.assign({}, state,{})
 
 ## Coding to implement features in Angular 2/4
 
@@ -490,9 +518,82 @@ this currency pipe expression:
 
 price | currency:'USD':true
 
-
-
 **Router** : Navigate from page to page within the client application and never leave the browser.
 
 **Testing** : Run unit tests on your application parts as they interact with the Angular framework using the Angular
 Testing Platform.
+
+**Angular LifeCycle Hooks**
+
+- constructor
+- ngOnChanges
+- ngOnInit
+- ngDoCheck
+-- ngAfterContentInit
+-- ngAfterContentChecked
+-- ngAfterViewInit
+-- ngAfterViewChecked
+- ngOnDestroy
+
+
+Q. Difference between Constructor and ngOnInit
+
+constructor method takes the values for the dependency injection and
+ngOnInit is a lifecycle hook that is fired after ngOnChanges
+
+inside ngOnInit() we can use
+
+
+##Node JS
+
+
+Q. ### Key Concepts: Asynchronous , Non-Blocking, Event Based, Single Threaded
+
+Q. How to add JSON object and read it from a file in node
+
+```
+const fs = require ('fs');
+let originalNote = {
+   title:'Some title',
+   body:'Some Body'
+};
+
+let originalNoteString = JSON.stringify(originalNote);
+fs.writeFileSync('notes.json',originalNoteString);
+let noteString  = fs.readFileSync('notes.json');
+const jsonNote = JSON.parse(noteString);
+
+console.log(jsonNote);
+
+```
+Q. debugging node
+
+```
+node debugging /filename
+```
+## REPL mode
+```
+repl (Read Evaluate print loop)
+```
+
+## Problem with arrow functions
+
+Consider this code
+```
+var user = {
+
+    name :'Ali',
+    logName:()=>{
+        console.log(arguments);
+        console.log('My name is: ',this.name);  //this will return undefined as "this" here will refer to as the
+        global object thats the issue with arrow function
+    },
+    logName2 () {
+        console.log(arguments);
+        console.log('My name is: ',this.name); //this will work perfectly fine
+
+    }
+};
+
+user.logName2(1,2,3);
+```
