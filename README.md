@@ -265,6 +265,9 @@ You specify the metadata with decorators such as @Component() and @Input(). You 
 9. What are the difference between Renderer and ElementRef in angular 2?
 
 ## Services Questions
+  what is Interface
+
+  An interface is a TypeScript artifact, it is not part of ECMAScript. An interface is a way to define a contract on a function with respect to the arguments and their type
 
 1. What is an Angular 2 Service?
 2. What are the features of Angular 2 Service?
@@ -752,3 +755,11 @@ var user = {
 
 user.logName2(1,2,3);
 ```
+
+
+## Angular Runtime Issues
+
+issue 1 .  While running ng serve  ### Field 'browser' doesn't contain a valid alias configuration
+
+### Solution:
+
