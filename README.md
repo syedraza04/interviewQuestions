@@ -3,50 +3,195 @@
 ## Angular Interview Questions
 
 1.	What is angular?
+
 2.	Is there breaking changes between angular 2 and angular 4?
+
 3.	What are the differences between angular 2 and angular 4 version?
+
 4.	What are new features in angular 4?
+
 5.	Which latest version of angular is stable?
+
+
 6.	What is directive, component, module, pipes in angular?
+
 7.	For what purpose angular service is used?
+
 8.	Is there any global variable in angular?
+
 9.	How can you share data between angular components?
+
 10.	What is @Input and @Output?
+
 11.	What is router? and why is it used?
+
 12.	What is module and how to modulerize application?
+
 13.	What is lazy loading and why is it used for?
+
 Lazy Loading is on demand loading of the application modules
+
 ```
 Routes= [{path:'recipes'},loadChildren:'./recipes/recipes.module#RecipesModule']
 ```
 14.	What is FormGroup and FormControl in angular? Why is it used for?
+
 15.	What is change in BrowserAnimationsModule from angular version 2 to 4?
+
 16.	What is angular decoration and why is used for?
+
 17.	What is angular CLI?
+
 18.	Is there platform dependency for running angular application?
+
 19.	How to bootstrap angular application?
+
 20.	What is dependency injection in angular?
+
 21.	What is interpolation in angular component?
+
 22.	How do you use one way and two way data binding?
+
 23.	How to apply animation to the angular component?
+
+
 24.	Describe Component lifecycle hooks.
+
 25.	How can you dynamically load the component?
+
 26.	What is difference between Structural and Attribute directives?
+
 27.	How to apply Custom validation to angular form?
+
 28.	Which is better, reactive or template-driven?
+
 29.	Tell me the properties of NgModule, Component, Directive, Injectable, Pipe.
+
 30.	What is an entry component?
+
+An entry component is any component that Angular loads imperatively by type.
+
+A component loaded declaratively via its selector is not an entry component.
+
+The bootstrapped root AppComponent is an entry component
+
+Components in route definitions are also entry components
+
+32. What's the difference between a bootstrap component and an entry component?
+
+A bootstrapped component is an entry component that Angular loads into the DOM during the bootstrap (application launch) process. Other entry components are loaded dynamically by other means, such as with the router.
+
 31.	Tell something about Routing & Navigation.
+
+To enable routing in Angular apps, following steps need to be done:
+
+ - Most routing applications should add a <base> element to the index.html as the first child in the <head> tag to tell the router how to compose navigation URLs
+
+ - ```
+ import { RouterModule, Routes } from '@angular/router';
+ ```
+ - define paths in the app.module
+
+ const appRoutes: Routes = [
+   { path: 'crisis-center', component: CrisisListComponent },
+   { path: 'hero/:id',      component: HeroDetailComponent },
+
+  - imports array use that object in the RouterModule.forRoot(appRoutes)
+
+  -
+    ```
+    <router-outlet></router-outlet>
+    <!-- Routed views go here -->
+    ```
+  -
+
+  -  include in html
+  ```
+    <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+  ```
+
 32.	Tell me about testing in angular? How to do end to end and unit testing in Angular? Which framework to use for this purpose?
+
+The Angular Test Bed (ATB) is a higher level Angular Only testing framework that allows us to easily test behaviours that depend on the Angular Framework.
+
+```
+import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {LoginComponent} from './login.component';
+import {AuthService} from "./auth.service";
+
+describe('Component: Login', () => {
+
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+  let authService: AuthService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      providers: [AuthService]
+    });
+
+    // create component and test fixture
+    fixture = TestBed.createComponent(LoginComponent);
+
+    // get test component from the fixture
+    component = fixture.componentInstance;
+
+    // UserService provided to the TestBed
+    authService = TestBed.get(AuthService);
+
+  });
+
+  it('canLogin returns false when the user is not authenticated', () => {
+    spyOn(authService, 'isAuthenticated').and.returnValue(false);
+    expect(component.needsLogin()).toBeTruthy();
+    expect(authService.isAuthenticated).toHaveBeenCalled();
+  });
+})
+```
+
+A fixture is a wrapper for a component and it’s template.
+
+We create an instance of a component fixture through the TestBed, this injects the AuthService into the component constructor.
+
+We can find the actual component from the componentInstance on the fixture.
+
+We can get resolve dependencies using the TestBed injector by using the get function.
+
 33.	Name few Built-in directives.
-34.	Which one to user with angular, JavaScript or TypeScript?
-35. What is Angular 2?
-36. What are the fundamentals concepts of Angular 2?
+
+   ngFor, ngIf, ngBind
+
 37. What Are The New Features Of Angular 2? Why You Used Angular 2?
-38. What are advantages of Angular 2?
+
+## Component-Based
+
+   Angular 2 is entirely component based. Controllers and $scope are no longer used. They have been replaced by components and directives
+
+## Directives
+
+   The specification for directives is considerably simplified, although they are still subject to change. With the
+   @Directive annotation, a directive can be declared
+
+## Forms and Validations
+
+   local references , TDD vs Reactive
+
 39. How Can We Setting Up Our Development Environment For Angular 2?
+
+  node, angular CLI, to create project
+
 40. What are TypeScript Types? In Detail?
+
+boolean, number, string ,Tuple types allow you to express an array where the type of a fixed number of elements is known, but need not be the same. For example, you may want to represent a value as a pair of a string and a number:
+
+// Declare a tuple type
+```
+ let x: [string, number];
+```
+
 41. What is AOT Compilation? - Pros and Cons of Ahead-of-Time!
+
 You should use AOT to compile an application that must launch quickly. With AOT, there is no runtime compile step. The client doesn't need the compiler library at all and excluding it significantly reduces the total payload
 ```
 @NgModule({
@@ -55,7 +200,13 @@ You should use AOT to compile an application that must launch quickly. With AOT,
   ],
 ```
 
-43. How would you Optimize the Angular 2 Application for Better Performance?
+43. How would you Optimize the Angular 4 Application for Better Performance?
+
+Using Lazy Loading
+
+Please Read More on this good article [Optimizing Angular Application](https://netbasal.com/optimizing-the-performance-of-your-angular-application-f222f1c16354)
+
+
 44. What are the Securities Threats should we be Aware of in Angular 2 Applications?
 45. What are major changes in Angular 2?
 46. What are the core components of Angular 2?
@@ -97,6 +248,10 @@ You specify the metadata with decorators such as @Component() and @Input(). You 
     bypassSecurityTrustUrl
     bypassSecurityTrustResourceUrl
     ```
+
+62. How to migrate from Angular 1 to 4
+
+
 ## Components Questions
 
 1. What is Components in Angular 2?
