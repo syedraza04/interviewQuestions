@@ -85,27 +85,29 @@ A bootstrapped component is an entry component that Angular loads into the DOM d
 
 To enable routing in Angular apps, following steps need to be done:
 
- - Most routing applications should add a <base> element to the index.html as the first child in the <head> tag to tell the router how to compose navigation URLs
+ 1. Most routing applications should add a <base> element to the index.html as the first child in the <head> tag to
+ tell the router how to compose navigation URLs
 
- - ```
+ ```
  import { RouterModule, Routes } from '@angular/router';
  ```
- - define paths in the app.module
+ 2. define paths in the app.module
 
+```
  const appRoutes: Routes = [
    { path: 'crisis-center', component: CrisisListComponent },
    { path: 'hero/:id',      component: HeroDetailComponent },
+```
 
-  - imports array use that object in the RouterModule.forRoot(appRoutes)
+  3. imports array use that object in the RouterModule.forRoot(appRoutes)
 
-  -
-    ```
-    <router-outlet></router-outlet>
-    <!-- Routed views go here -->
-    ```
-  -
+```
+   <router-outlet></router-outlet>
+   <!-- Routed views go here -->
+```
 
-  -  include in html
+  4. include in html
+
   ```
     <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
   ```
