@@ -899,7 +899,7 @@ obj.checkThis();  // this points to checkThis function
 ```
 
 
-
+```
 var obj = {
     checkThis:function (){
         console.log('obj function: ',this);
@@ -911,10 +911,11 @@ var obj = {
     console.log("Moo: ",this.moo); //prints undefined
    }
 }
-
+```
 
 to stop this behavior use 'use strict'
 
+```
  var obj = {
      checkThis:function (){
          console.log('obj function: ',this);
@@ -927,12 +928,12 @@ to stop this behavior use 'use strict'
      console.log("Moo: ",this.moo); //prints undefined
     }
  }
-
+```
  or bind this like var self= this;
 
 
- call & apply
-
+## call & apply
+```
  "use strict";
 
  function asim(){
@@ -952,11 +953,12 @@ to stop this behavior use 'use strict'
 
  a.call(1,2,3,4);  //prints 1, 2, 3, 4
  a.apply(1,[2,3,4]) //prints 1, 2, 3, 4
+```
 
 ## call vs apply vs bind
 
 when arguments are in form of an array
-
+```
 var num = [1,2,3,4,5,6,7,8];
 
 function sum () {
@@ -968,35 +970,42 @@ function sum () {
    }
 
 sum.apply(null, num);
-
+```
 
 ## bind
 
 it is used to bind the value of this to the function object
 
+```
 //this works
 var a = function () {
    console.log(this);
 }.bind(1);
 a();   //prints 1
+```
 
 //but this wont work
+
+```
 function a () {
    console.log(this);
 }.bind(1);
 a();
+```
 
+```
 var ali = {
 func:a
 }
 
 ali.func() //prints 1
-
+```
 
 prototype
 
 object itself -- > object prototype
 
+```
 "use strict"
 var animal = {
     kind: 'human'
@@ -1008,10 +1017,11 @@ asim.kind = 'igloo'
 
 console.log(asim.kind); //igloo
 console.log(animal.kind); //human
+```
 
 ## 2nd example
 
-
+```
 var asim = Object.create(animal,{food:{value:'mango'}});
 console.log(animal.isPrototypeOf(asim));
 asim.kind = 'igloo'
@@ -1019,10 +1029,11 @@ asim.kind = 'igloo'
 console.log(asim); // kind:"igloo" food:"mango"
 console.log(asim.kind); //igloo
 console.log(animal.kind); //human
-
+```
 
 ## confusing example
 
+```
 var obj = {
     sayName: function (){
         console.log(this);
@@ -1033,7 +1044,7 @@ var obj2 = obj.sayName;
 
 obj2();  // window object
 obj.sayName();  // sayName
-
+```
 
 
 ## Classical vs Prototypal Inheritance
