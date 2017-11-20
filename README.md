@@ -543,10 +543,13 @@ Object.assign({}, state,{})
 Interceptors intercept http request and manipulate with it
 
 first in the app.module import
+
 ```
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 ```
+
 add to the providers array
+
 ```
 {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
 ```
@@ -591,8 +594,8 @@ export class MyComponent implements OnInit {
   }
 
 }
-
 ```
+
 add it in the declarations array in the app.module
 
 ## Directives
@@ -818,7 +821,7 @@ var foo = function () {
 ```
 
 ## Scope Chain
-
+```
 function foo () {
   console.log(myVar);
 }
@@ -837,11 +840,13 @@ function goo(){
    }
    foo() ; // works
  }
+```
 
 ## IIFE
-
+```
  (function (){
  })(); //immediately invoked to avoid polluting global namespace
+```
 
 ## Closures
 
