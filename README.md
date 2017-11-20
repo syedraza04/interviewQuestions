@@ -702,6 +702,13 @@ ngOnInit is a lifecycle hook that is fired after ngOnChanges
 inside ngOnInit() we can use
 
 
+Q. Decorators:
+
+Decorators are functions that modify JavaScript classes. Angular has many decorators that attach metadata to classes so that it knows what those classes mean and how they should work
+
+
+
+
 ##Node JS
 
 
@@ -757,9 +764,300 @@ user.logName2(1,2,3);
 ```
 
 
+
+
+
 ## Angular Runtime Issues
 
 issue 1 .  While running ng serve  ### Field 'browser' doesn't contain a valid alias configuration
 
 ### Solution:
+
+## Javascript
+
+pass by reference vs pass by value
+
+in JS primitive types are pass by value
+
+strings
+number
+boolean
+
+objects are pass by reference
+
+```
+var a=10;
+function print(a){
+  a = 20;
+}
+
+console.log(a);//prints 10
+
+var b = {}
+function changeObj(b){
+  b.change = 'changed'
+}
+changeObj(b);
+  console.log(b)   // b.change = changed
+```
+
+## Hoisting
+
+variable and function declarations are hoisted on top
+
+
+```
+foo();  //undefined
+
+var foo = function () {
+  var a  = 1;
+  console.log(a);
+}
+
+
+```
+
+## Scope Chain
+
+function foo () {
+  console.log(myVar);
+}
+
+function goo () {
+   var myVar = 1;
+   foo();
+}
+
+goo() // return an error saying myVar is not defined
+
+function goo(){
+   var myVar = 1;
+   function foo () {
+   console.log(myVar)
+   }
+   foo() ; // works
+ }
+
+## IIFE
+
+ (function (){
+ })(); //immediately invoked to avoid polluting global namespace
+
+## Closures
+
+```
+"use strict";
+
+var foo = [];
+for (var i =0; i < 10 ; i++) {
+    foo[i] = function () {
+        return i;
+    }
+}
+
+console.log(foo[0]()); /// return 10
+console.log(foo[1]()); /// return 10
+```
+
+
+## to overcome this issue we use IIFE
+
+```
+"use strict";
+
+var foo = [];
+for (var i =0; i < 10 ; i++) {
+    (function(i){
+         foo[i]=function (){
+            return i;
+        }
+    })(i)
+}
+
+console.log(foo[0]()); /// return 10
+console.log(foo[1]()); /// return 10
+```
+
+
+## the This keyword
+
+```
+// "use strict";
+
+function checkThiss () {
+    console.log( this);
+}
+
+var obj = {
+    checkThis:function (){
+        console.log('obj function: ',this);
+    }
+}
+
+checkThiss();   //window object if "use strict" is not used
+obj.checkThis();  // this points to checkThis function
+```
+
+
+
+var obj = {
+    checkThis:function (){
+        console.log('obj function: ',this);
+    function checkOther(){
+        var moo =1;
+        console.log(this);
+    }
+    checkOther();   //this prints window object because we don't know in which context this keyword is called in
+    console.log("Moo: ",this.moo); //prints undefined
+   }
+}
+
+
+to stop this behavior use 'use strict'
+
+ var obj = {
+     checkThis:function (){
+         console.log('obj function: ',this);
+         function checkOther(){
+            "use strict"
+            var moo =1;
+            console.log(this);
+         }
+     checkOther();   //this prints undefined because we use the  'use strict' keyword
+     console.log("Moo: ",this.moo); //prints undefined
+    }
+ }
+
+ or bind this like var self= this;
+
+
+ call & apply
+
+ "use strict";
+
+ function asim(){
+     console.log(this);   ///this prints 1
+ }
+
+ asim.call(1);
+
+ function a(b,c,d) {
+    console.log(this)   ///prints 1
+    console.log(b);
+
+    console.log(c);
+    console.log(d);
+
+ }
+
+ a.call(1,2,3,4);  //prints 1, 2, 3, 4
+ a.apply(1,[2,3,4]) //prints 1, 2, 3, 4
+
+## call vs apply vs bind
+
+when arguments are in form of an array
+
+var num = [1,2,3,4,5,6,7,8];
+
+function sum () {
+   var total = 0;
+   for (var i = 0 ; i < arguments.length ; i++){
+      total = total + i;
+     }
+   return total
+   }
+
+sum.apply(null, num);
+
+
+## bind
+
+it is used to bind the value of this to the function object
+
+//this works
+var a = function () {
+   console.log(this);
+}.bind(1);
+a();   //prints 1
+
+//but this wont work
+function a () {
+   console.log(this);
+}.bind(1);
+a();
+
+var ali = {
+func:a
+}
+
+ali.func() //prints 1
+
+
+prototype
+
+object itself -- > object prototype
+
+"use strict"
+var animal = {
+    kind: 'human'
+}
+var asim = {};
+asim.__proto__ = animal;
+console.log(animal.isPrototypeOf(asim));
+asim.kind = 'igloo'
+
+console.log(asim.kind); //igloo
+console.log(animal.kind); //human
+
+## 2nd example
+
+
+var asim = Object.create(animal,{food:{value:'mango'}});
+console.log(animal.isPrototypeOf(asim));
+asim.kind = 'igloo'
+
+console.log(asim); // kind:"igloo" food:"mango"
+console.log(asim.kind); //igloo
+console.log(animal.kind); //human
+
+
+## confusing example
+
+var obj = {
+    sayName: function (){
+        console.log(this);
+    }
+}
+
+var obj2 = obj.sayName;
+
+obj2();  // window object
+obj.sayName();  // sayName
+
+
+
+## Classical vs Prototypal Inheritance
+
+class is a architectural diagram then we make instance of the class
+
+prototypal inheritance make another house from an existing house
+
+classical inheritance in JS is emulated through pseudo classical pattern
+
+how to implement pseudo classical inheritance in JS
+
+
+// event capturing vs bubbling
+
+by default events are bubbled up not captured
+but u can set it to capturing mode by adding a third
+parameter to the addEventListener('click',function,true)
+
+// difference between stopPropagation() and preventDefault()
+
+stopPropogation stops the event from bublling or capturing
+bubbling is the default behaviour , and preventDefault
+is used to prevent the default behaviour on of the element
+for example if we define the input type checkbox
+then prevent default would prevent checkbox to be ticked
 
